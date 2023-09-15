@@ -16,6 +16,7 @@
     "@react-native-firebase/database": "^18.3.2",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/stack": "^6.3.17",
+    "@react-navigation/drawer": "^6.6.3",
     "dotenv": "^16.3.1",
     "expo": "~49.0.8",
     "expo-constants": "^14.4.2",
