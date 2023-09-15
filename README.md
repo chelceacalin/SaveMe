@@ -90,3 +90,127 @@ For open source projects, say how it is licensed.
 
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+
+#DE FACUT
+
+Nume Echipa: 
+Nume Applicatie: Save Me
+Tema: Aplicatie mobila pentru protejarea femeilor de rapiri
+Stack: Front - React Native, Ui Library - Native Base, Stocare Date - Firebase Database, stocare Imagini - Firebase Storage
+
+Link Figma: https://www.figma.com/file/JE0aMXAjw5IDt7zUo2PrIb/Save-Me?type=design&node-id=0-1&mode=design&t=3jiteWgpoT92La6K-0
+
+
+De instalat:
+Visual Studio Code, Android Studio ( desktop ) / Expo Go (Telefon)
+Extensii: Auto Rename Tag, Bracket Pair Color DLW, React
+
+De implementat:
+- Design pagini ca in figma
+- Log In Email si Parola  X
+- Register Email, Parola, Numar Telefon   X
+- Chat function + cautare useri ( search ) -calin
+- Dropdown ca sa adaugi si sa stergi useri in lista de useri silent -radu
+- Dropdown ca sa adaugi si sa stergi useri in lista de useri loud -radu
+- Adauga poza la profil in firebase storage si pune in acel user imgurl acel link, ca sa vezi in myprofile, in drawer si in conversatii --calin
+- Functie trimitere mesaje persoane cu locatia ta -sonia si radu -- butonul are 2 stari (apasat -> locatia este retrimisa la 30sec ; neapast -> oprit)
+- Cand apas pe emergency loud, pe langa mesajele trimise, sa sune alarma telefonului + deschidere flashlight --aer
+
++ CREAT POWERPOINT APLICATIE
+
+Optional (daca mai e timp ):
+- Widget sa poti porni alarmele direct din Home la telefon
+- Setat timer ca sa se trimita mesajul cu locatia odata la 5 minute, indiferent daca ai inchis sau nu aplicatia
+- Camera sa faca poze selfie/back camera pana nu opresti alarma
+- Pozele sa fie uploadate in cloud (firebase storage)
+- In main page acel quote section sa ia un quote random sa il actualizeze la ceva timp indiferent daca deschizi sau nu app
+- Log In Google Si poate Facebook   
+
+
+
+De instalat: React expo cli pe calc tuturor
+In proiect: 
+react-native-uuid,@firebase/database, firebase/storage,expo-image-picker,firebase,firebase/auth,@react-navigation/stack,@react-navigation/native,firebase/auth,firebase/storage,react-native-vector-icons/FontAwesome,react-native-elements,@react-navigation/drawer,@react-navigation/native
+
+
+DB Structure:
+
+users:
+ key
+    user_id=key
+    username
+    email
+    password
+    phoneNumber
+    photoUrl
+
+silentList
+  user_x_id=key
+    user_y_id=key
+       phoneNumber
+       available=true/false  
+
+
+loudList
+  user_x_id=key
+    user_y_id
+       phoneNumber
+       available=true/false  
+
+
+
+message:
+ user_x_id
+   user_y_id
+      key: message_id
+         message_id:key
+         message: text
+         whoSentIt: user id
+         toWhom: user id
+   
+
+
+
+
+
+
+Example
+
+
+silentList
+  user_1_id
+    user_2_id
+       phoneNumber
+       available=true/false  
+    user_3_id
+       phoneNumber
+       available=true/false
+     user_4_id
+       phoneNumber
+       available=true/false
+  user_2_id
+    user_11_id
+       phoneNumber
+       available=true/false  
+    user_3_id
+       phoneNumber
+       available=true/false
+     user_5_id
+       phoneNumber
+       available=true/false
+
+
+
+message:
+ user_1_id
+    user_2_id
+        msg_1
+            msg_1
+            salut
+            user_2_id
+            user_1_id
+         msg_2
+            msg_2
+            salut
+            user_2_id
+            user_1_id
