@@ -8,7 +8,7 @@ function CustomDrawerContent(props) {
       <View style={styles.container}>
         <TouchableOpacity 
           style={styles.button}
-          onPress={() => props.navigation.navigate('Home')}
+          onPress={() => props.navigation.navigate('home')}
         >
           <Text style={styles.buttonText}>Go Home</Text>
         </TouchableOpacity>
@@ -19,6 +19,20 @@ function CustomDrawerContent(props) {
           onPress={() => props.navigation.navigate('About')}
         >
           <Text style={styles.buttonText}>About</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => props.navigation.navigate('LoudEmergencyConfig')}
+        >
+          <Text style={styles.buttonText}>Loud Emergency Config</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => props.navigation.navigate('SilentEmergencyConfig')}
+        >
+          <Text style={styles.buttonText}>Silent Emergency Config</Text>
         </TouchableOpacity>
       </View>
     </DrawerContentScrollView>
