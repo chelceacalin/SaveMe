@@ -1,12 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,Button } from 'react-native';
 import { useAuthentication } from '../../hooks/useAuthentication';
-import { Button } from 'react-native-elements';
+import { getAuth, signOut } from 'firebase/auth';
 
-export default function HomeScreen({navigation}) {
+const auth = getAuth();
+
+export default function HomeScreen() {
   const { user } = useAuthentication();
   return (
     <View style={styles.container}>
-      <Text>Welcome !</Text>
+      <Text>Welcome {user?.email}!</Text>
+      <Button title="Sign Out" style={{marginTop:10}} onPress={() => signOut(auth)} />
     </View>
   );
 }
