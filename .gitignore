@@ -1,4 +1,7 @@
 node_modules
+web
+.expo/web/cache
+.expo/web/cache/development
 .expo/web/cache/development/babel-loader/0bca66a4d837e2328a64d3d530a2be923dae21198eacb4a8fed87e49311ee0fa.json
 .expo/web/cache/development/babel-loader/0bf2b781127112b88c375ffcb4ff34edf4f0c188085c7e7f5fdc831143bd4bfc.json
 .expo/web/cache/development/babel-loader/0c115cb809036970debbfc4ab324fdd7d1dfd4570cb17723535fdcf434873e97.json

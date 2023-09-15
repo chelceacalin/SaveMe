@@ -15,7 +15,7 @@ const SignInScreen = ({ navigation }) => {
 
   async function login() {
     if (email === "" || password === "") {
-      setValidationMessage("required fields missing");
+      setValidationMessage("Required fields missing");
       return;
     }
 
@@ -45,7 +45,7 @@ const SignInScreen = ({ navigation }) => {
           leftIcon={<Icon name="envelope" size={16} />}
         />
         
-        <Text style={styles.labelPass}>Password</Text>
+        <Text style={styles.label}>Password</Text>
         <Input
           placeholder="Password"
           containerStyle={styles.inputContainer}
@@ -63,9 +63,8 @@ const SignInScreen = ({ navigation }) => {
           titleStyle={styles.signInButtonTitle} 
           onPress={login}
         />
-        <View>
-          <Text style={[styles.label,styles.accountYet]}>
-            {" "}
+        <View style={styles.accountYet}>
+          <Text style={styles.label}>
             Don't have an account yet ?
             <TouchableOpacity onPress={() => navigation.navigate("Sign Up")}>
               <Text style={styles.signUpLink}>Sign up here!</Text>
@@ -81,9 +80,6 @@ const SignInScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  accountYet:{
-      marginLeft:'40%'
-  },
   container: {
     flex: 1,
     backgroundColor: "#1B394F",
@@ -95,17 +91,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   content: {
-    width: "100%",
+    width: "80%", // Adjust this width as needed
     paddingHorizontal: 20,
-  },
-  footer: {
-    alignItems: "center", 
   },
   title: {
     color: "#FFC107",
     fontSize: 24,
     marginBottom: 40,
-    marginTop:40,
+    marginTop: 40,
     fontWeight: "bold",
   },
   signUpLink: {
@@ -121,27 +114,17 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   label: {
-    marginLeft:'38%',
     color: "white",
     fontWeight: "bold",
     marginBottom: 5,
-  },
-  labelPass: {
-    marginLeft:'38%',
-    color: "white",
-    fontWeight: "bold",
-    marginBottom: 5,
-    marginTop: 15,
   },
   inputContainer: {
     marginTop: 10,
-    margin:'auto',
     backgroundColor: "white",
-    width: "25%", 
+    width: "100%", // Use 100% to fill the container width
     borderRadius: 20,
     paddingHorizontal: 15,
   },
-  
   input: {
     color: "black",
     marginBottom: 10,
@@ -155,8 +138,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFC107", 
     borderRadius: 10,
     paddingVertical: 15,
-    width:'150px',
-    marginLeft:'45%'
+    width: "80%", // Adjust this width as needed
+    alignSelf: "center", // Center the button horizontally
   },
   signInButtonTitle: {
     color: "#1B394F", 
@@ -168,6 +151,11 @@ const styles = StyleSheet.create({
     color: "red",
     fontSize: 14,
     textAlign: "center",
+  },
+  accountYet: {
+    marginTop: 20,
+    flexDirection: "row", // Display "Don't have an account yet?" and "Sign up here!" in a row
+    justifyContent: "center", // Center the content horizontally
   },
 });
 
