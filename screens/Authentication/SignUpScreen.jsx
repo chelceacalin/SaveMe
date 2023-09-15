@@ -14,10 +14,11 @@ const SignUpScreen  = ({ navigation }) => {
   const [password, setPassword] = useState('')
   const [validationMessage, setValidationMessage] = useState('')
   const [phone,setPhone]=useState("")
-
   let validateAndSet = (value,setValue) => {
    setValue(value)
 }
+
+
 
 
 async function createAccount() {
