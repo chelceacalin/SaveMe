@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",
+    "@firebase/app": "^0.9.19",
     "@firebase/database": "^1.0.1",
     "@firebase/storage": "^0.11.2",
     "@react-native-firebase/database": "^18.3.2",
