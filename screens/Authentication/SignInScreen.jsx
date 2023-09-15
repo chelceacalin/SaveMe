@@ -3,34 +3,45 @@ import { StyleSheet, Text, View,Image,TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button } from 'react-native-elements';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { ref,set,push } from '@firebase/database';
+import { db } from '../../config/firebase';
 
 const auth = getAuth();
 
+
+
 const SignInScreen = ({ navigation}) => {
+  
+
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [validationMessage,setvalidationMessage] = useState('');
   
   async function login() {
     if (email === '' || password === '') {
-      setvalidationMessage('required filled missing')
+      setvalidationMessage('required fields missing');
       return;
     }
-
+  
     try {
-      await signInWithEmailAndPassword(auth,email, password);
+      await signInWithEmailAndPassword(auth, email, password);
+  
+      setEmail('');
+      setPassword('');
+      setvalidationMessage('');
     } catch (error) {
-     setvalidationMessage(error.message);
+      setvalidationMessage(error.message);
     }
   }
+
+  
 
   return (
     <View style={styles.container}>
       <View>
-        <Image style={{width:150,height:150,alignSelf:'center'}}/>
         <Input
           placeholder='Email'
-          containerStyle={{marginTop: 10}}
+          containerStyle={{marginTop: 10,backgroundColor:'white',width:'auto'}}
           value={email}
           onChangeText={(text) => setEmail(text)}
           leftIcon={<Icon name='envelope' size={16}/>}
@@ -38,7 +49,7 @@ const SignInScreen = ({ navigation}) => {
 
         <Input
           placeholder='Password'
-          containerStyle={{marginTop: 10}}
+          containerStyle={{marginTop: 10,backgroundColor:'white',width:'auto'}}
           value={password}
           onChangeText={(text) => setPassword(text)}
           secureTextEntry={true}
