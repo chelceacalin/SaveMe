@@ -5,12 +5,21 @@ import SignInScreen from '../Authentication/SignInScreen';
 import SignUpScreen from '../Authentication/SignUpScreen';
 
 const Stack = createStackNavigator();
+
 function AuthStack() {
   return (
     <Stack.Navigator>
-    <Stack.Screen name="Sign In" component={SignInScreen} />
-    <Stack.Screen name="Sign Up" component={SignUpScreen} />
-  </Stack.Navigator>
+      <Stack.Screen
+        name="Sign In"
+        component={SignInScreen}
+        options={{ headerShown: false }} // Hide the header for this screen
+      />
+      <Stack.Screen
+        name="Sign Up"
+        component={SignUpScreen}
+        options={{ headerShown: false }} // Hide the header for this screen
+      />
+    </Stack.Navigator>
   )
 }
 

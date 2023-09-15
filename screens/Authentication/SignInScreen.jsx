@@ -11,93 +11,163 @@ const auth = getAuth();
 const SignInScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [validationMessage, setvalidationMessage] = useState("");
+  const [validationMessage, setValidationMessage] = useState("");
 
   async function login() {
     if (email === "" || password === "") {
-      setvalidationMessage("required fields missing");
+      setValidationMessage("required fields missing");
       return;
     }
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-
       setEmail("");
       setPassword("");
-      setvalidationMessage("");
+      setValidationMessage("");
     } catch (error) {
-      setvalidationMessage(error.message);
+      setValidationMessage(error.message);
     }
   }
 
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.header}>
+        <Text style={styles.title}>SAVE ME</Text>
+      </View>
+      <View style={styles.content}>
+        <Text style={styles.label}>Email</Text>
         <Input
           placeholder="Email"
-          containerStyle={{
-            marginTop: 10,
-            backgroundColor: "white",
-            width: "auto",
-          }}
+          containerStyle={styles.inputContainer}
+          inputStyle={styles.input}
           value={email}
           onChangeText={(text) => setEmail(text)}
           leftIcon={<Icon name="envelope" size={16} />}
         />
-
+        
+        <Text style={styles.labelPass}>Password</Text>
         <Input
           placeholder="Password"
-          containerStyle={{
-            marginTop: 10,
-            backgroundColor: "white",
-            width: "auto",
-          }}
+          containerStyle={styles.inputContainer}
+          inputStyle={[styles.input, styles.blackText]}
           value={password}
           onChangeText={(text) => setPassword(text)}
           secureTextEntry={true}
           leftIcon={<Icon name="key" size={16} />}
         />
-        {<Text style={styles.error}>{validationMessage}</Text>}
-
+        <Text style={styles.error}>{validationMessage}</Text>
+  
         <Button
-          title="Sign in"
-          buttonStyle={{ marginTop: 10 }}
+          title="Sign In"
+          buttonStyle={styles.signInButton} 
+          titleStyle={styles.signInButtonTitle} 
           onPress={login}
         />
         <View>
-          <Text style={{ marginTop: 5, fontSize: 17, marginRight: 5 }}>
+          <Text style={[styles.label,styles.accountYet]}>
             {" "}
             Don't have an account yet ?
             <TouchableOpacity onPress={() => navigation.navigate("Sign Up")}>
-              <Text style={styles.SignUpHere}>Sign up here!</Text>
+              <Text style={styles.signUpLink}>Sign up here!</Text>
             </TouchableOpacity>
           </Text>
         </View>
+      </View>
+      <View style={styles.footer}>
+        <Text style={styles.lifeMatters}>EVERY LIFE MATTERS</Text>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  SignUpHere: {
-    color: "blue",
+  accountYet:{
+      marginLeft:'40%'
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "#1B394F",
+    alignItems: "center",
+    justifyContent: "space-between", 
+    paddingBottom: 20, 
+  },
+  header: {
+    marginTop: 20,
+  },
+  content: {
+    width: "100%",
+    paddingHorizontal: 20,
+  },
+  footer: {
+    alignItems: "center", 
+  },
+  title: {
+    color: "#FFC107",
+    fontSize: 24,
+    marginBottom: 40,
+    marginTop:40,
+    fontWeight: "bold",
+  },
+  signUpLink: {
+    color: "#FF3D00",
     fontSize: 15,
     marginTop: 20,
     fontWeight: "bold",
-    margin: "auto",
-    paddingLeft:15
+    paddingLeft: 15,
   },
-
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    bottom: 50,
+  lifeMatters: {
+    color: "#FFC107",
+    fontSize: 18,
+    marginBottom: 20,
+  },
+  label: {
+    marginLeft:'38%',
+    color: "white",
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  labelPass: {
+    marginLeft:'38%',
+    color: "white",
+    fontWeight: "bold",
+    marginBottom: 5,
+    marginTop: 15,
+  },
+  inputContainer: {
+    marginTop: 10,
+    margin:'auto',
+    backgroundColor: "white",
+    width: "25%", 
+    borderRadius: 20,
+    paddingHorizontal: 15,
+  },
+  
+  input: {
+    color: "black",
+    marginBottom: 10,
+    fontSize: 16,
+  },
+  blackText: {
+    color: "black",
+  },
+  signInButton: {
+    marginTop: 20,
+    backgroundColor: "#FFC107", 
+    borderRadius: 10,
+    paddingVertical: 15,
+    width:'150px',
+    marginLeft:'45%'
+  },
+  signInButtonTitle: {
+    color: "#1B394F", 
+    fontSize: 18, 
+    fontWeight: "bold",
   },
   error: {
     marginTop: 10,
     color: "red",
+    fontSize: 14,
+    textAlign: "center",
   },
 });
 
