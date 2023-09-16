@@ -115,9 +115,10 @@ function CustomDrawerContent(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     display: "flex",
     justifyContent: "space-between",
+    height: 180,
+    flex:1
   },
   button: {
     justifyContent: "center",
