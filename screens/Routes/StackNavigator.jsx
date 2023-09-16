@@ -19,7 +19,7 @@ function StackNavigator() {
       <Stack.Screen name="home" component={HomeScreen} />
       <Stack.Screen name="LoudEmergencyConfig" component={LoudEmergencyConfig} />
       <Stack.Screen name="SilentEmergencyConfig" component={SilentEmergencyConfig} />
-      <Stack.Screen name="conversations" component={ConversationList} 
+      <Stack.Screen name="conversations" component={ConversationList}
         options={{headerShown:true}}
 
 
