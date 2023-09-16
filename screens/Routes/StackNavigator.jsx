@@ -45,7 +45,7 @@ function StackNavigator() {
       <Stack.Screen
         name="conversation"
         component={Conversation}
-        options={headerOptions} 
+        options={{ headerShown: false }} 
       />
         <Stack.Screen
         name="myprofile"

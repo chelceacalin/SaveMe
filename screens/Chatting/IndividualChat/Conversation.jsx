@@ -77,9 +77,12 @@ export default function Conversation({ navigation, route,photoUrl }) {
   };
 
   const openModal = (item) => {
-    setSelectedMessage(item);
-    showModal();
+    if (item.whoSentIt === currentUserId) {
+      setSelectedMessage(item);
+      showModal();
+    }
   };
+  
 
   const closeModal = () => {
     hideModal();
@@ -89,17 +92,19 @@ export default function Conversation({ navigation, route,photoUrl }) {
   const deleteMessage = () => {
     if (selectedMessage) {
       const messageId = selectedMessage.id;
-
-      set(
-        ref(db, `messages/${currentUserId}/${targetUserUid}/${messageId}`),
-        null
-      );
-      closeModal();
-
-      set(
-        ref(db, `messages/${currentUserId}/${targetUserUid}/${messageId}`),
-        null
-      );
+  
+      if (selectedMessage.whoSentIt === currentUserId) {
+        set(
+          ref(db, `messages/${currentUserId}/${targetUserUid}/${messageId}`),
+          null
+        );
+  
+        set(
+          ref(db, `messages/${targetUserUid}/${currentUserId}/${messageId}`),
+          null
+        );
+      }
+  
       closeModal();
     }
   };
