@@ -16,7 +16,7 @@ import { useAuthentication } from "../../../hooks/useAuthentication";
 import { getAuth } from "firebase/auth";
 import { getDatabase, child, get } from "firebase/database";
 
-export default function IndividualChatNavbar({ navigation,targetUserUid }) {
+export default function IndividualChatNavbar({ navigation,targetUserUid ,photoUrl}) {
   const auth = getAuth();
   const [targetUserData, setTargetUserData] = useState(null);
 
