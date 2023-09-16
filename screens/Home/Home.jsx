@@ -10,13 +10,13 @@ import { sendSMS } from "../../services/sms.service";
 import ConversationList from "../Chatting/ConversationList";
 import HomeNavbar from "./Navbar/HomeNavbar";
 import { AntDesign } from "@expo/vector-icons";
-
+import CameraScreen from "../camera/Camera";
 const auth = getAuth();
 
 export default function HomeScreen({ navigation }) {
   const [loudButtonPressed, setLoudButtonPressed] = useState(false);
   const [silentButtonPressed, setSilentButtonPressed] = useState(false);
-
+  const [quoteIndex, setQuoteIndex] = useState(0);
   const quotes = [
     "Believe in yourself and all that you are.",
     "You are stronger than you think.",
@@ -44,17 +44,26 @@ export default function HomeScreen({ navigation }) {
     "You are never too old to set another goal or to dream a new dream.",
     "The only way to do great work is to love what you do."
   ]
-  
+
   const generateRandomNumber = () => {
     const min = 0;
-    const max = 24;
+    const max = quotes.length - 1;
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
-  
+
 
   useEffect(() => {
     getLocationPermission();
   }, []);
+
+  useEffect(() => {
+    const quoteInterval = setInterval(() => {
+      setQuoteIndex(generateRandomNumber());
+    }, 15000);
+
+    return () => clearInterval(quoteInterval);
+  }, []);
+
 
   useEffect(() => {
     if (loudButtonPressed || silentButtonPressed) {
@@ -72,6 +81,8 @@ export default function HomeScreen({ navigation }) {
   function onPressLoudButton() {
     setLoudButtonPressed(!loudButtonPressed);
     setSilentButtonPressed(false);
+    
+    navigation.navigate('camera')
   }
 
   function onPressSilentButton() {
