@@ -53,12 +53,12 @@ export default function LoudEmergencyConfig() {
     <View style={styles.container}>
       <Text>Loud Emergency Contact List</Text>
 
-      <TouchableOpacity 
+      <TouchableHighlight 
           style={styles.addContact}
             onPress={() => setModalVisible(true)}
         >
           <Text style={styles.buttonText}> Add New Contact </Text>
-        </TouchableOpacity>
+        </TouchableHighlight>
         <ScrollView style={styles.scrollContainer}> 
 
         <Modal
@@ -67,6 +67,7 @@ export default function LoudEmergencyConfig() {
           visible={modalVisible}
           onRequestClose={() => {
             alert('Modal has been closed.');
+            setModalVisible(false);
           }}>
           <View style={{marginTop: 22, alignItems: 'center'}}>
             <View>
@@ -76,16 +77,16 @@ export default function LoudEmergencyConfig() {
 
               <View style={{width:"100%",display:'flex',flexDirection:'row',marginTop:20,alignContent:'center',justifyContent:'center'}}>
 
-                <TouchableOpacity
+                <TouchableHighlight
                     style = {{backgroundColor:"grey", padding:10, display:'inline-block',margin:3}}
                     onPress={() => {
                     setModalVisible(false);
 
                     }}>
                     <Text>Close</Text>
-                </TouchableOpacity>
+                </TouchableHighlight>
 
-                <TouchableOpacity
+                <TouchableHighlight
                     style = {{backgroundColor:"green", padding:10, display:'inline-block',margin:3}}
                     onPress={() => {
                     setModalVisible(false);
@@ -100,7 +101,7 @@ export default function LoudEmergencyConfig() {
 
                     }}>
                     <Text>Save</Text>
-                </TouchableOpacity>
+                </TouchableHighlight>
 
                 </View>
             </View>
@@ -109,11 +110,11 @@ export default function LoudEmergencyConfig() {
 
         {persons.map((person) => (
             <View key={person?.phoneNumber}>
-            <TouchableOpacity
+            <TouchableHighlight
                     onPress={() => openUserModal(person)}
                 >
                 <Text style={styles.item} key={person.phoneNumber}>{person.name}</Text>
-            </TouchableOpacity>
+            </TouchableHighlight>
 
             <Modal 
                 animationType="fade"
@@ -121,6 +122,7 @@ export default function LoudEmergencyConfig() {
                 visible={userModalVisible}
                 onRequestClose={() => {
                     alert('Modal has been closed.');
+                    setUserModalVisible(false);
                 }}>
                 <View style={{marginTop: 22, alignItems: 'center'}}>
                     <View>
@@ -129,7 +131,7 @@ export default function LoudEmergencyConfig() {
                     <TextInput value={activeModalPersonPhoneNumber} style={styles.modalItems} onChangeText={setActiveModalPersonPhoneNumber}/>
 
                     <View style={{width:"100%",display:'flex',flexDirection:'row',marginTop:20,alignContent:'center',justifyContent:'center'}}>
-                        <TouchableOpacity
+                        <TouchableHighlight
                             style = {{backgroundColor:"grey", padding:10, display:'inline-block', margin:3}}
                             onPress={() => {
                             setUserModalVisible(false);
@@ -139,9 +141,9 @@ export default function LoudEmergencyConfig() {
                             <Text 
                             style = {{color:"white"}}
                             >Cancel</Text>
-                        </TouchableOpacity>
+                        </TouchableHighlight>
 
-                        <TouchableOpacity
+                        <TouchableHighlight
                             style = {{backgroundColor:"green", padding:10, display:'inline-block',margin:3}}
                             onPress={() => {
                             setUserModalVisible(false);
@@ -160,9 +162,9 @@ export default function LoudEmergencyConfig() {
                             <Text 
                             style = {{color:"white"}}
                             >Edit</Text>
-                        </TouchableOpacity>
+                        </TouchableHighlight>
 
-                        <TouchableOpacity
+                        <TouchableHighlight
                             style = {{backgroundColor:"red", padding:10, display:'inline-block',margin:3}}
                             onPress={() => {
                             set(ref(db, `loudEmergencyContacts/${auth.currentUser.uid}/${activeModalPersonPhoneNumber}`), null);
@@ -173,7 +175,7 @@ export default function LoudEmergencyConfig() {
                             <Text 
                             style = {{color:"white"}}
                             >Delete</Text>
-                        </TouchableOpacity>
+                        </TouchableHighlight>
                     </View>
                     </View>
                 </View>

@@ -54,12 +54,12 @@ export default function SilentEmergencyConfig() {
     <View style={styles.container}>
       <Text>Silent Emergency Contact List</Text>
 
-      <TouchableOpacity 
+      <TouchableHighlight 
           style={styles.addContact}
             onPress={() => setModalVisible(true)}
         >
           <Text style={styles.buttonText}> Add New Contact </Text>
-        </TouchableOpacity>
+        </TouchableHighlight>
         <ScrollView style={styles.scrollContainer}> 
 
         <Modal
@@ -68,6 +68,7 @@ export default function SilentEmergencyConfig() {
           visible={modalVisible}
           onRequestClose={() => {
             alert('Modal has been closed.');
+            setModalVisible(false);
           }}>
           <View style={{marginTop: 22, alignItems: 'center'}}>
             <View>
@@ -75,15 +76,15 @@ export default function SilentEmergencyConfig() {
               <TextInput placeholder="Name" style={styles.modalItems} onChangeText={setName}/>
               <TextInput placeholder="Phone Number" style={styles.modalItems} onChangeText={setPhoneNumber}/>
 
-              <TouchableOpacity
+              <TouchableHighlight
                 onPress={() => {
                   setModalVisible(false);
 
                 }}>
                 <Text>Close</Text>
-              </TouchableOpacity>
+              </TouchableHighlight>
 
-              <TouchableOpacity
+              <TouchableHighlight
                 onPress={() => {
                   setModalVisible(false);
                   console.log(name);
@@ -97,18 +98,18 @@ export default function SilentEmergencyConfig() {
 
                 }}>
                 <Text>Save</Text>
-              </TouchableOpacity>
+              </TouchableHighlight>
             </View>
           </View>
         </Modal>
 
         {persons.map((person) => (
             <View key={person?.phoneNumber}>
-            <TouchableOpacity
+            <TouchableHighlight
                     onPress={() => openUserModal(person)}
                 >
                 <Text style={styles.item} key={person.phoneNumber}>{person.name}</Text>
-            </TouchableOpacity>
+            </TouchableHighlight>
 
             <Modal 
                 animationType="fade"
@@ -116,6 +117,7 @@ export default function SilentEmergencyConfig() {
                 visible={userModalVisible}
                 onRequestClose={() => {
                     alert('Modal has been closed.');
+                    setUserModalVisible(false);
                 }}>
                 <View style={{marginTop: 22, alignItems: 'center'}}>
                     <View>
@@ -124,7 +126,7 @@ export default function SilentEmergencyConfig() {
                     <TextInput value={activeModalPersonPhoneNumber} style={styles.modalItems} onChangeText={setActiveModalPersonPhoneNumber}/>
 
                     <View style={{width:"100%",display:'flex',flexDirection:'row',marginTop:20}}>
-                        <TouchableOpacity
+                        <TouchableHighlight
                             style = {{backgroundColor:"grey", width:'60px', display:'inline-block', margin:3}}
                             onPress={() => {
                             setUserModalVisible(false);
@@ -134,9 +136,9 @@ export default function SilentEmergencyConfig() {
                             <Text 
                             style = {{color:"white"}}
                             >Cancel</Text>
-                        </TouchableOpacity>
+                        </TouchableHighlight>
 
-                        <TouchableOpacity
+                        <TouchableHighlight
                             style = {{backgroundColor:"green", width:'60px', display:'inline-block',margin:3}}
                             onPress={() => {
                             setUserModalVisible(false);
@@ -154,9 +156,9 @@ export default function SilentEmergencyConfig() {
                             <Text 
                             style = {{color:"white"}}
                             >Edit</Text>
-                        </TouchableOpacity>
+                        </TouchableHighlight>
 
-                        <TouchableOpacity
+                        <TouchableHighlight
                             style = {{backgroundColor:"red", width:'60px', display:'inline-block',margin:3}}
                             onPress={() => {
                             set(ref(db, `silentEmergencyContacts/${auth.currentUser.uid}/${phoneNumber}`),null);
@@ -167,7 +169,7 @@ export default function SilentEmergencyConfig() {
                             <Text 
                             style = {{color:"white"}}
                             >Delete</Text>
-                        </TouchableOpacity>
+                        </TouchableHighlight>
                     </View>
                     </View>
                 </View>
