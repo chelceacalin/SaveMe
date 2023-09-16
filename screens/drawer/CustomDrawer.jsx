@@ -16,9 +16,9 @@ function CustomDrawerContent(props) {
 
         <TouchableOpacity 
           style={styles.button}
-          onPress={() => props.navigation.navigate('About')}
+          onPress={() => props.navigation.navigate('myprofile')}
         >
-          <Text style={styles.buttonText}>About</Text>
+          <Text style={styles.buttonText}>My Profile</Text>
         </TouchableOpacity>
 
         <TouchableOpacity 

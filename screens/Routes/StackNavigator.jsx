@@ -6,7 +6,7 @@ import SilentEmergencyConfig from '../EmergencyConfig/SilentEmergencyConfig';
 import ConversationList from '../Chatting/ConversationList';
 import Conversation from '../Chatting/IndividualChat/Conversation';
 import HomeScreen from '../Home/Home';
-
+import MyProfile from '../MyProfile/MyProfile';
 const Stack = createStackNavigator();
 
 const headerOptions = {
@@ -25,7 +25,7 @@ function StackNavigator() {
       <Stack.Screen
         name="home"
         component={HomeScreen}
-        options={{ headerShown: false }} // Hide the header on the "home" screen
+        options={{ headerShown: false }} 
       />
       <Stack.Screen
         name="LoudEmergencyConfig"
@@ -45,6 +45,11 @@ function StackNavigator() {
       <Stack.Screen
         name="conversation"
         component={Conversation}
+        options={headerOptions} 
+      />
+        <Stack.Screen
+        name="myprofile"
+        component={MyProfile}
         options={headerOptions} 
       />
     </Stack.Navigator>
