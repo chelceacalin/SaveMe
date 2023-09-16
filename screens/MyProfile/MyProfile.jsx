@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
+  TextInput,
   TouchableOpacity,
   StyleSheet,
   Image,
@@ -18,6 +19,7 @@ import {
 } from "@firebase/storage";
 import { useAuthentication } from "../../hooks/useAuthentication";
 import * as ImagePicker from "expo-image-picker";
+import { ToastAndroid } from "react-native";
 
 const auth = getAuth();
 
@@ -25,9 +27,11 @@ export default function MyProfile() {
   const [userData, setUserData] = useState(null);
   const [image, setImage] = useState(null);
   const [uploadedImageURL, setUploadedImageURL] = useState(null);
+  const [username, setUsername] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const { user } = useAuthentication();
 
-  const uploadImage = () => {
+  const updateProfile = () => {
     if (image === null) {
       return;
     }
@@ -40,19 +44,23 @@ export default function MyProfile() {
 
         uploadBytes(imgRef, blob, metadata).then(() => {
           getDownloadURL(imgRef).then((res) => {
-            setUploadedImageURL(res); // Store the uploaded image URL
-            console.log(res);
-
+            setUploadedImageURL(res);
             const userRef = ref(db, `users/${user.uid}`);
-            update(userRef, { photoUrl: res });
+            update(userRef, { photoUrl: res, username, phoneNumber });
             readUserData();
+
+            ToastAndroid.show(
+              "Profile updated successfully!",
+              ToastAndroid.SHORT
+            );
           });
         });
       });
   };
+
   const handleImagePicker = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-  
+
     if (status !== "granted") {
       console.log("Permission to access media library is required!");
       return;
@@ -65,8 +73,7 @@ export default function MyProfile() {
       quality: 1,
     });
 
-
-    if (!result.canceled) {
+    if (!result.cancelled) {
       setImage(result.uri);
     }
   };
@@ -80,6 +87,12 @@ export default function MyProfile() {
       const data = snapshot.val();
       if (data) {
         setUserData(data);
+        setImage(
+          data.photoUrl ||
+            "https://firebasestorage.googleapis.com/v0/b/fir-auth-fbaef.appspot.com/o/defaultImage.png?alt=media&token=8f2e90d4-7fc8-45f0-8696-dea85c2317fe"
+        );
+        setUsername(data.username || "");
+        setPhoneNumber(data.phoneNumber || "");
       }
     });
   };
@@ -95,32 +108,31 @@ export default function MyProfile() {
         </Text>
       </View>
 
-      
-
-      <View style={styles.profileContainer}>
-        {userData ? (
-          <Image
-            source={{ uri: userData.photoUrl }}
-            style={styles.profileImage}
-          />
-        ) : (
-          <Image
-            source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/fir-auth-fbaef.appspot.com/o/defaultImage.png?alt=media&token=8f2e90d4-7fc8-45f0-8696-dea85c2317fe",
-            }}
-            style={styles.profileImage}
-          />
-        )}
+      <View style={styles.imagePreviewContainer}>
+        {image && <Image source={{ uri: image }} style={styles.imagePreview} />}
         <TouchableOpacity onPress={handleImagePicker}>
-          <Text style={styles.Text}>Click to select an image</Text>
+          <Text style={styles.text}>Click to select an image</Text>
         </TouchableOpacity>
-
-        <Button
-          style={{ marginTop: 40 }}
-          title="Upload Image"
-          onPress={uploadImage}
-        />
       </View>
+
+      <TextInput
+        style={styles.input}
+        placeholder={`${userData && userData.username}`}
+        value={username}
+        onChangeText={setUsername}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder={`${userData && userData.phone}`}
+        value={phoneNumber}
+        onChangeText={setPhoneNumber}
+      />
+
+      <Button
+        style={{ marginTop: 40 }}
+        title="Update Profile"
+        onPress={updateProfile}
+      />
     </View>
   );
 }
@@ -129,7 +141,7 @@ const styles = StyleSheet.create({
   nameColor: {
     color: "#E76C6C",
   },
-  Text: {
+  text: {
     color: "white",
     fontSize: 16,
     margin: 5,
@@ -149,15 +161,25 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
   },
-  profileContainer: {
+  imagePreviewContainer: {
     alignItems: "center",
     justifyContent: "center",
     marginTop: 45,
     marginBottom: 20,
   },
-  profileImage: {
+  imagePreview: {
     width: 150,
     height: 150,
-    borderRadius: 75, 
+    borderRadius: 75,
+  },
+  input: {
+    width: "80%",
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  toast: {
+    position: "bottom", // Adjust as needed
   },
 });

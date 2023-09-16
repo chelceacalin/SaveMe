@@ -35,9 +35,11 @@
     "react-native-image-picker": "^5.6.1",
     "react-native-paper": "^5.10.4",
     "react-native-reanimated": "~3.3.0",
+    "react-native-toast-message": "^2.1.6",
     "react-native-uuid": "^2.0.1",
     "react-native-vector-icons": "^10.0.0",
     "react-native-web": "~0.19.6",
+    "toastify-react-native": "^3.1.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
