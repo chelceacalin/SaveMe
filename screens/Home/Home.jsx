@@ -7,14 +7,14 @@ import {sendSMS} from "../../services/sms.service";
 
 const auth = getAuth();
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
 	const [loudButtonPressed, setLoudButtonPressed] = useState(false);
 	const [silentButtonPressed, setSilentButtonPressed] = useState(false);
-	
+
 	useEffect(() => {
 		getLocationPermission();
 	}, []);
-	
+
 	useEffect(() => {
 		if (loudButtonPressed || silentButtonPressed) {
 			const interval = setInterval(() => {
@@ -25,19 +25,19 @@ export default function HomeScreen() {
 			return () => clearInterval(interval);
 		}
 	}, [loudButtonPressed, silentButtonPressed])
-	
+
 	const {user} = useAuthentication();
-	
+
 	function onPressLoudButton() {
 		setLoudButtonPressed(!loudButtonPressed)
 		setSilentButtonPressed(false)
 	}
-	
+
 	function onPressSilentButton() {
 		setSilentButtonPressed(!silentButtonPressed)
 		setLoudButtonPressed(false)
 	}
-	
+
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity style={[styles.button, styles.loudButton]} onPress={onPressLoudButton}>

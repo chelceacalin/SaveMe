@@ -9,37 +9,41 @@ import {db} from '../../config/firebase';
 const auth = getAuth();
 
 const SignUpScreen = ({navigation}) => {
+    const [username,setUsername]=useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [validationMessage, setValidationMessage] = useState('');
 	const [phone, setPhone] = useState('');
-	
+
 	async function createAccount() {
 		if (email === '' || password === '') {
 			setValidationMessage('Required fields are missing');
 			return;
 		}
-		
+
 		try {
 			let userKey;
 			let success = false;
 			await createUserWithEmailAndPassword(auth, email, password).then((credential) => {
 				success = true;
 				userKey = credential.user.uid;
-				
-				const newUserEntry = {
-					id: userKey,
-					email: email,
-					password: password,
-					phone: phone,
-				};
-				
+
+
+        const newUserEntry = {
+          id: userKey,
+          username:username,
+          email: email,
+          password: password,
+          phone: phone,
+          photoUrl:"https://firebasestorage.googleapis.com/v0/b/fir-auth-fbaef.appspot.com/o/defaultImage.png?alt=media&token=8f2e90d4-7fc8-45f0-8696-dea85c2317fe"
+        };
 				set(ref(db, `users/${userKey}`), newUserEntry);
 			});
-			
+
 			if (success) {
 				setEmail('');
 				setPassword('');
+				setUsername('');
 				setValidationMessage('');
 				navigation.navigate('Sign In');
 			} else {
@@ -49,10 +53,23 @@ const SignUpScreen = ({navigation}) => {
 			setValidationMessage(error.message);
 		}
 	}
-	
+
 	return (
 		<View style={styles.container}>
 			<View>
+
+			  <Text style={styles.label}>Username</Text>
+                    <Input
+                      placeholder='Username'
+                      containerStyle={styles.inputContainer}
+                      inputStyle={styles.input}
+                      value={email}
+                      onChangeText={(text) => setUsername(text)}
+                      leftIcon={<Icon name='envelope' size={16} />}
+                    />
+
+
+
 				<Text style={styles.label}>Email</Text>
 				<Input
 					placeholder='Email'
@@ -81,7 +98,7 @@ const SignUpScreen = ({navigation}) => {
 					onChangeText={(value) => setPhone(value)}
 					leftIcon={<Icon name='key' size={16}/>}
 				/>
-				
+
 				<Text style={styles.error}>{validationMessage}</Text>
 				<Button
 					title='Sign up'
@@ -100,6 +117,112 @@ const SignUpScreen = ({navigation}) => {
 			</View>
 		</View>
 	);
+const SignUpScreen = ({ navigation }) => {
+  const [username,setUsername]=useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [validationMessage, setValidationMessage] = useState('');
+  const [phone, setPhone] = useState('');
+
+  async function createAccount() {
+    if (email === '' || password === '') {
+      setValidationMessage('Required fields are missing');
+      return;
+    }
+
+    try {
+      let userKey;
+      let success = false;
+      await createUserWithEmailAndPassword(auth, email, password).then((credential) => {
+        success = true;
+        userKey = credential.user.uid;
+
+        const newUserEntry = {
+          id: userKey,
+          username:username,
+          email: email,
+          password: password,
+          phone: phone,
+          photoUrl:"https://firebasestorage.googleapis.com/v0/b/fir-auth-fbaef.appspot.com/o/defaultImage.png?alt=media&token=8f2e90d4-7fc8-45f0-8696-dea85c2317fe"
+        };
+
+        set(ref(db, `users/${userKey}`), newUserEntry);
+      });
+
+      if (success) {
+        setEmail('');
+        setPassword('');
+        setValidationMessage('');
+        navigation.navigate('Sign In');
+      } else {
+        setValidationMessage('User account creation failed');
+      }
+    } catch (error) {
+      setValidationMessage(error.message);
+    }
+  }
+
+  return (
+    <View style={styles.container}>
+      <View>
+      <Text style={styles.label}>Username</Text>
+        <Input
+          placeholder='Username'
+          containerStyle={styles.inputContainer}
+          inputStyle={styles.input}
+          value={email}
+          onChangeText={(text) => setUsername(text)}
+          leftIcon={<Icon name='envelope' size={16} />}
+        />
+
+
+        <Text style={styles.label}>Email</Text>
+        <Input
+          placeholder='Email'
+          containerStyle={styles.inputContainer}
+          inputStyle={styles.input}
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+          leftIcon={<Icon name='envelope' size={16} />}
+        />
+        <Text style={styles.label}>Password</Text>
+        <Input
+          placeholder='Password'
+          containerStyle={styles.inputContainer}
+          inputStyle={styles.input}
+          value={password}
+          onChangeText={(value) => setPassword(value)}
+          secureTextEntry
+          leftIcon={<Icon name='key' size={16} />}
+        />
+        <Text style={styles.label}>Phone Number</Text>
+        <Input
+          placeholder='Phone Number'
+          containerStyle={styles.inputContainer}
+          inputStyle={styles.input}
+          value={phone}
+          onChangeText={(value) => setPhone(value)}
+          leftIcon={<Icon name='key' size={16} />}
+        />
+
+        <Text style={styles.error}>{validationMessage}</Text>
+        <Button
+          title='Sign up'
+          buttonStyle={styles.signInButton}
+          titleStyle={styles.signInButtonTitle}
+          onPress={createAccount}
+        />
+        <View>
+          <Text style={styles.loginText}>
+            Already have an account?
+            <TouchableOpacity onPress={() => navigation.navigate('Sign In')} style={styles.loginLink}>
+              <Text style={styles.loginLinkText}>Login here</Text>
+            </TouchableOpacity>
+          </Text>
+        </View>
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({

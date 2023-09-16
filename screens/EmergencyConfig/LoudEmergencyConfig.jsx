@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,Button } from 'react-native';
+import { StyleSheet, Text, View,Button,TextInput} from 'react-native';
 import { useAuthentication } from '../../hooks/useAuthentication';
 import { getAuth } from 'firebase/auth';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -6,7 +6,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-native';
 import { TouchableHighlight } from 'react-native';
-import { TextInput } from 'react-native-web';
 import { db } from '../../config/firebase';
 import { set, ref, onValue, remove} from "firebase/database";
 
