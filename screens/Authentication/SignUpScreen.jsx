@@ -9,6 +9,7 @@ import { db } from '../../config/firebase';
 const auth = getAuth();
 
 const SignUpScreen = ({ navigation }) => {
+  const [username,setUsername]=useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [validationMessage, setValidationMessage] = useState('');
@@ -29,9 +30,11 @@ const SignUpScreen = ({ navigation }) => {
 
         const newUserEntry = {
           id: userKey,
+          username:username,
           email: email,
           password: password,
           phone: phone,
+          photoUrl:"https://firebasestorage.googleapis.com/v0/b/fir-auth-fbaef.appspot.com/o/defaultImage.png?alt=media&token=8f2e90d4-7fc8-45f0-8696-dea85c2317fe"
         };
 
         set(ref(db, `users/${userKey}`), newUserEntry);
@@ -53,6 +56,17 @@ const SignUpScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View>
+      <Text style={styles.label}>Username</Text>
+        <Input
+          placeholder='Username'
+          containerStyle={styles.inputContainer}
+          inputStyle={styles.input}
+          value={email}
+          onChangeText={(text) => setUsername(text)}
+          leftIcon={<Icon name='envelope' size={16} />}
+        />
+
+
         <Text style={styles.label}>Email</Text>
         <Input
           placeholder='Email'

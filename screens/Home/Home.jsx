@@ -4,11 +4,12 @@ import { getAuth, signOut } from 'firebase/auth';
 
 const auth = getAuth();
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
   const { user } = useAuthentication();
   return (
     <View style={styles.container}>
       <Text>Welcome {user?.email}!</Text>
+      <Button title="CHAT"  onPress={() => navigation.navigate('conversations')} />
       <Button title="Sign Out" style={styles.signOut} onPress={() => signOut(auth)} />
     </View>
   );
