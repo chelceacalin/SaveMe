@@ -14,7 +14,7 @@ export default function HomeScreen({navigation}) {
 	const [loudEmergencyContacts, setLoudEmergencyContacts] = useState([]);
 	const [silentEmergencyContacts, setSilentEmergencyContacts] = useState([]);
 	const [soundObject, setSoundObject] = useState(null);
-	
+
 	const [quoteIndex, setQuoteIndex] = useState(0);
 	const quotes = [
 		"Believe in yourself and all that you are.",
@@ -43,27 +43,27 @@ export default function HomeScreen({navigation}) {
 		"You are never too old to set another goal or to dream a new dream.",
 		"The only way to do great work is to love what you do."
 	]
-	
+
 	const {user} = useAuthentication();
-	
+
 	const generateRandomNumber = () => {
 		const min = 0;
 		const max = quotes.length - 1;
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	};
-	
+
 	useEffect(() => {
 		getLocationPermission();
 	}, []);
-	
+
 	useEffect(() => {
 		const quoteInterval = setInterval(() => {
 			setQuoteIndex(generateRandomNumber());
 		}, 15000);
-		
+
 		return () => clearInterval(quoteInterval);
 	}, []);
-	
+
 	useEffect(() => {
 		if (loudButtonPressed || silentButtonPressed) {
 			const interval = setInterval(() => {
@@ -83,7 +83,7 @@ export default function HomeScreen({navigation}) {
 			return () => clearInterval(interval);
 		}
 	}, [loudEmergencyContacts, silentEmergencyContacts])
-	
+
 	useEffect(() => {
 		if (loudButtonPressed) {
 			startAlarm();
@@ -91,7 +91,7 @@ export default function HomeScreen({navigation}) {
 			stopAlarm();
 		}
 	}, [loudButtonPressed])
-	
+
 	async function startAlarm() {
 		const newSoundObject = new Audio.Sound();
 		try {
@@ -102,7 +102,7 @@ export default function HomeScreen({navigation}) {
 			console.error('Error playing sound:', error);
 		}
 	}
-	
+
 	async function stopAlarm() {
 		if (soundObject !== null) {
 			try {
@@ -112,7 +112,7 @@ export default function HomeScreen({navigation}) {
 			}
 		}
 	}
-	
+
 	function readData() {
 		onValue(ref(db, "/loudEmergencyContacts/" + user.uid), (snapshot) => {
 			const data = Object.values(snapshot.val());
@@ -123,7 +123,7 @@ export default function HomeScreen({navigation}) {
 			setSilentEmergencyContacts(data)
 		});
 	}
-	
+
 	function onPressLoudButton() {
 		console.log('onPressLoudButton')
 		readData();
@@ -133,7 +133,7 @@ export default function HomeScreen({navigation}) {
 			navigation.navigate('camera')
 		}
 	}
-	
+
 	function onPressSilentButton() {
 		console.log('onPressSilentButton')
 		readData();
@@ -143,7 +143,7 @@ export default function HomeScreen({navigation}) {
 			navigation.navigate('camera')
 		}
 	}
-	
+
 	return (
 		<View style={styles.container}>
 			<HomeNavbar navigation={navigation}/>
