@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  Image
 } from "react-native";
 import { db } from "../../../config/firebase";
 import { ref, set, onValue } from "@firebase/database";
@@ -14,7 +15,7 @@ import IndividualChatNavbar from "./IndividualChatNavbar";
 import { Modal, Portal, Button, Provider } from "react-native-paper";
 import { styles } from "./ConversationStyles";
 
-export default function Conversation({ navigation, route }) {
+export default function Conversation({ navigation, route,photoUrl }) {
   const { targetUserUid, currentUserId } = route.params;
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -125,6 +126,7 @@ export default function Conversation({ navigation, route }) {
         <IndividualChatNavbar
           navigation={navigation}
           targetUserUid={targetUserUid}
+          photoUrl={photoUrl}
         />
         <FlatList
           ref={flatListRef}

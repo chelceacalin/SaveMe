@@ -53,7 +53,7 @@ export default function ConversationList({ navigation }) {
         onPress={() => {
           const targetUserUid = id;
           const currentUserId = user.uid;
-          navigation.navigate("conversation", { targetUserUid, currentUserId });
+          navigation.navigate("conversation", { targetUserUid, currentUserId,photoUrl });
         }}
       >
         <View style={styles.avatarContainer}>
