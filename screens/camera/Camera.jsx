@@ -1,64 +1,79 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera } from 'expo-camera';
-import * as MediaLibrary from 'expo-media-library';
 import { captureRef } from 'react-native-view-shot';
+import uuid from 'react-native-uuid';
+import { storage } from '../../config/firebase';
+import {
+  getDownloadURL,
+  uploadBytes,
+  ref as storageRef,
+} from "@firebase/storage";
+import { useAuthentication } from '../../hooks/useAuthentication';
 
-export default function CameraScreen() {
-  const cameraRef = useRef(null);
-
+export default function CameraScreen({ navigation }) {
+  const backCameraRef = useRef(null);
+  const frontCameraRef = useRef(null);
+  const { user } = useAuthentication();
   const [hasPermission, setHasPermission] = useState(null);
-  const [cameraReady, setCameraReady] = useState(false); 
+  const [cameraReady, setCameraReady] = useState(false);
 
   useEffect(() => {
-    const delay = 1700; 
+    const delay = 1700;
     const timer = setTimeout(() => {
-      if (cameraReady && cameraRef.current) {
-        takePicture();
+      if (cameraReady && backCameraRef.current && frontCameraRef.current) {
+        takeBackPhotoAndUpload();
+        takeFrontPhotoAndUpload();
       }
     }, delay);
-  
+
     return () => clearTimeout(timer);
-  }, [cameraReady]); 
-  
+  }, [cameraReady]);
 
-  useEffect(() => {
-    if (cameraReady && cameraRef.current) {
-      takePicture();
-    }
-  }, [cameraReady]); 
+  const takeBackPhotoAndUpload = async () => {
+    await takePictureAndUpload(backCameraRef, 'Back');
+  };
 
-  const takePicture = async () => {
-    console.log("camera ref: ", cameraRef);
-    if (cameraRef.current) {
+  const takeFrontPhotoAndUpload = async () => {
+    await takePictureAndUpload(frontCameraRef, 'Front');
+  };
+
+  const takePictureAndUpload = async (camera, type) => {
+    if (camera) {
       try {
-        console.log("Taking picture...");
         const options = {
           format: 'jpg',
           quality: 1,
         };
-        const uri = await captureRef(cameraRef, options);
+        const uri = await captureRef(camera, options);
         if (uri) {
-          console.log("Picture captured successfully:", uri);
-          const asset = await MediaLibrary.createAssetAsync(uri);
-          MediaLibrary.createAlbumAsync('Expo', asset)
-            .then(() => {
-              console.log('Image saved to album');
-            })
-            .catch((error) => {
-              console.error('Error creating album:', error);
-            });
+          uploadImageToFirebase(uri, type);
         } else {
-          console.log("Failed to capture picture. URI is null.");
+          console.log(`Failed to capture ${type} picture. URI is null.`);
         }
       } catch (error) {
-        console.error('Error taking picture:', error);
+        console.error(`Error taking ${type} picture:`, error);
       }
     } else {
-      console.log("Camera ref is null.");
+      console.log(`Camera ref for ${type} is null.`);
     }
   };
-  
+
+  const uploadImageToFirebase = async (imageUri, type) => {
+    console.log(`Uploading ${type} photo`);
+    const imgRef = storageRef(storage, `EmergencyList/${user.uid}/${type}/${uuid.v4()}.jpeg`);
+    fetch(imageUri)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const metadata = { contentType: "image/jpeg" };
+
+        uploadBytes(imgRef, blob, metadata).then(() => {
+          getDownloadURL(imgRef).then((res) => {
+            console.log(`Image uploaded to Firebase (${type}):`, res);
+          });
+        });
+      });
+  };
 
   return (
     <View style={[styles.container, { backgroundColor: '#1b3a4f' }]}>
@@ -66,19 +81,30 @@ export default function CameraScreen() {
         <Camera
           style={styles.camera}
           ref={(ref) => {
-            cameraRef.current = ref;
+            backCameraRef.current = ref;
           }}
+          type={Camera.Constants.Type.back} // Use the back camera
           ratio="4:6"
-          onCameraReady={() => setCameraReady(true)} 
-        >
-        </Camera>
+          onCameraReady={() => setCameraReady(true)}
+        />
+        <Camera
+          style={styles.camera}
+          ref={(ref) => {
+            frontCameraRef.current = ref;
+          }}
+          type={Camera.Constants.Type.front} // Use the front camera
+          ratio="4:6"
+        />
       </View>
       <TouchableOpacity
         style={styles.captureButton}
-        onPress={takePicture}
+        onPress={() => {
+          takeBackPhotoAndUpload();
+          takeFrontPhotoAndUpload();
+        }}
       >
         <Text style={styles.captureButtonText}>
-          Take Picture
+          Take Photos
         </Text>
       </TouchableOpacity>
     </View>
@@ -91,12 +117,12 @@ const styles = StyleSheet.create({
   },
   cameraContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'row',
   },
   camera: {
-    width: '100%',
-    aspectRatio: 2 / 3, 
+    flex: 1,
+    aspectRatio: 2 / 3,
+    margin: 15,
   },
   captureButton: {
     alignSelf: 'center',
