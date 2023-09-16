@@ -16,7 +16,7 @@ const auth = getAuth();
 export default function HomeScreen({ navigation }) {
   const [loudButtonPressed, setLoudButtonPressed] = useState(false);
   const [silentButtonPressed, setSilentButtonPressed] = useState(false);
-
+  const [quoteIndex, setQuoteIndex] = useState(0);
   const quotes = [
     "Believe in yourself and all that you are.",
     "You are stronger than you think.",
@@ -47,7 +47,7 @@ export default function HomeScreen({ navigation }) {
 
   const generateRandomNumber = () => {
     const min = 0;
-    const max = 24;
+    const max = quotes.length - 1;
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
@@ -55,6 +55,15 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     getLocationPermission();
   }, []);
+
+  useEffect(() => {
+    const quoteInterval = setInterval(() => {
+      setQuoteIndex(generateRandomNumber());
+    }, 15000);
+
+    return () => clearInterval(quoteInterval);
+  }, []);
+
 
   useEffect(() => {
     if (loudButtonPressed || silentButtonPressed) {
@@ -72,6 +81,8 @@ export default function HomeScreen({ navigation }) {
   function onPressLoudButton() {
     setLoudButtonPressed(!loudButtonPressed);
     setSilentButtonPressed(false);
+    
+    navigation.navigate('camera')
   }
 
   function onPressSilentButton() {
