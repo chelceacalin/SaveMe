@@ -10,7 +10,7 @@ import { sendSMS } from "../../services/sms.service";
 import ConversationList from "../Chatting/ConversationList";
 import HomeNavbar from "./Navbar/HomeNavbar";
 import { AntDesign } from "@expo/vector-icons";
-
+import CameraScreen from "../camera/Camera";
 const auth = getAuth();
 
 export default function HomeScreen({ navigation }) {
@@ -47,8 +47,13 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <HomeNavbar navigation={navigation}  />
-
-      <View style={styles.content}>
+      <TouchableOpacity
+        style={styles.cameraButton}
+        onPress={() => navigation.navigate('camera')}
+      >
+        <Text style={styles.cameraButtonText}>Open Camera</Text>
+      </TouchableOpacity>
+        <View style={styles.content}>
         <TouchableOpacity
           style={[styles.button, styles.loudButton]}
           onPress={onPressLoudButton}

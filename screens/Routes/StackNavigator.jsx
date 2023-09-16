@@ -7,6 +7,7 @@ import ConversationList from '../Chatting/ConversationList';
 import Conversation from '../Chatting/IndividualChat/Conversation';
 import HomeScreen from '../Home/Home';
 import MyProfile from '../MyProfile/MyProfile';
+import CameraScreen from '../camera/Camera';
 const Stack = createStackNavigator();
 
 const headerOptions = {
@@ -19,7 +20,7 @@ const headerOptions = {
   },
 };
 
-function StackNavigator() {
+export default function StackNavigator() {
   return (
     <Stack.Navigator initialRouteName="home">
       <Stack.Screen
@@ -47,13 +48,16 @@ function StackNavigator() {
         component={Conversation}
         options={{ headerShown: false }} 
       />
-        <Stack.Screen
+      <Stack.Screen
         name="myprofile"
         component={MyProfile}
+        options={headerOptions} 
+      />
+      <Stack.Screen
+        name="camera"
+        component={CameraScreen}
         options={headerOptions} 
       />
     </Stack.Navigator>
   );
 }
-
-export default StackNavigator;
