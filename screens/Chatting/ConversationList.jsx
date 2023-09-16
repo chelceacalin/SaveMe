@@ -6,30 +6,31 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  ScrollView,
 } from "react-native";
 import { db } from "../../config/firebase";
 import { ref, onValue } from "@firebase/database";
 import { useAuthentication } from "../../hooks/useAuthentication";
 import { Searchbar } from "react-native-paper";
+import { getAuth, signOut } from "firebase/auth";
 
+
+
+const auth = getAuth();
 export default function ConversationList({ navigation }) {
   const [userData, setUserData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
   const { user } = useAuthentication();
   const [searchQuery, setSearchQuery] = useState("");
 
   const filterData = (query) => {
-    const filtered = userData.filter(
+    if (!userData) return [];
+    return userData.filter(
       (user) =>
-        user.username.toLowerCase().includes(query.toLowerCase()) ||
-        user.email.toLowerCase().includes(query.toLowerCase())
+        user.username?.toLowerCase().includes(query.toLowerCase()) ||
+        user.email?.toLowerCase().includes(query.toLowerCase())
     );
-    setFilteredData(filtered);
   };
   const onChangeSearch = (query) => {
     setSearchQuery(query);
-    filterData(query);
   };
 
   useEffect(() => {
@@ -41,27 +42,48 @@ export default function ConversationList({ navigation }) {
       const data = snapshot.val();
       if (data) {
         const usersArray = Object.values(data);
-        setUserData(usersArray);
+        let currentUserData = null;
+  
+        // Find and remove the current user's data from the array
+        const filteredUsers = usersArray.filter((user) => {
+          if (user.id === auth.currentUser.uid) {
+            currentUserData = user;
+            return false; // Exclude the current user
+          }
+          return true; // Include other users
+        });
+  
+        // Insert the current user's data at the beginning of the array
+        if (currentUserData) {
+          setUserData([currentUserData, ...filteredUsers]);
+        } else {
+          setUserData(filteredUsers);
+        }
       }
     });
   };
+  
 
-  const Item = ({ id, username, email, photoUrl }) => {
+  const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
         style={styles.listItem}
         onPress={() => {
-          const targetUserUid = id;
+          const targetUserUid = item.id;
           const currentUserId = user.uid;
-          navigation.navigate("conversation", { targetUserUid, currentUserId,photoUrl });
+          navigation.navigate("conversation", {
+            targetUserUid,
+            currentUserId,
+            photoUrl: item.photoUrl,
+          });
         }}
       >
         <View style={styles.avatarContainer}>
-          <Image source={{ uri: photoUrl }} style={styles.avatar} />
+          <Image source={{ uri: item.photoUrl }} style={styles.avatar} />
         </View>
         <View style={styles.userInfo}>
-          <Text style={styles.username}>{username}</Text>
-          <Text style={styles.prop}> {email}</Text>
+          <Text style={styles.username}>{item.username}</Text>
+          <Text style={styles.prop}> {item.email}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -77,10 +99,11 @@ export default function ConversationList({ navigation }) {
       />
 
       <FlatList
-        data={filteredData.length > 0 ? filteredData : userData}
+        data={filterData(searchQuery)}
         keyExtractor={(item) => item.email}
-        renderItem={({ item }) => <Item {...item} />}
+        renderItem={renderItem}
       />
+
     </View>
   );
 }
