@@ -4,7 +4,6 @@ import {StyleSheet, Text, View} from 'react-native';
 export const styles = StyleSheet.create({
     colorWhite:{
       color:'white',
-      fontWeight:"bold"
     },
   
     container: {
@@ -42,7 +41,6 @@ export const styles = StyleSheet.create({
       backgroundColor: 'gray',
       color: '#FFFFFF',
       fontSize: 18,
-      fontWeight: 'bold',
       borderRadius: 10,
       height: 45,
       padding: 5,
@@ -53,7 +51,6 @@ export const styles = StyleSheet.create({
       backgroundColor:'#11438E',
       padding:10,
       color:'white',
-      fontWeight:'bold',
       paddingLeft:15,
       paddingRight:15
     }

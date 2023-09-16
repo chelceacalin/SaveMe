@@ -20,7 +20,6 @@ const Stack = createStackNavigator();
 function StackNavigatorWithDrawer() {
   return (
     <Drawer.Navigator
-    screenOptions={{headerShown:false}}
       initialRouteName="Home"
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >

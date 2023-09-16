@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
   prop: {
     color: "white",
     fontSize: 18,
-    fontWeight: "bold",
   },
   title: {
     backgroundColor: "gray",
@@ -101,7 +100,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
     color: "white",
     fontSize: 24,
-    fontWeight: "bold",
   },
   listItem: {
     flexDirection: "row",
@@ -126,7 +124,6 @@ const styles = StyleSheet.create({
   },
   username: {
     fontSize: 18,
-    fontWeight: "bold",
     color: "white",
   },
   prop: {
