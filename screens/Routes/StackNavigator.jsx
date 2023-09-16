@@ -21,18 +21,19 @@ const headerOptions = {
 
 function StackNavigator() {
   return (
-    <Stack.Navigator initialRouteName="home">
+    <Stack.Navigator backgroundColor="#1b3a4f"
+    initialRouteName="home">
       <Stack.Screen
         name="home"
         component={HomeScreen}
         options={{ headerShown: false }} 
       />
-      <Stack.Screen
-        name="LoudEmergencyConfig"
+      <Stack.Screen 
+        name="LoudEmergencyConfig" 
         component={LoudEmergencyConfig}
         options={headerOptions} 
       />
-      <Stack.Screen
+      <Stack.Screen backgroundColor="#1b3a4f"
         name="SilentEmergencyConfig"
         component={SilentEmergencyConfig}
         options={headerOptions} 

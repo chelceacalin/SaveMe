@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-native';
 import { TouchableHighlight } from 'react-native';
-import { TextInput } from 'react-native-web';
+import { TextInput } from 'react-native';
 import { db } from '../../config/firebase';
 import { set, ref, onValue} from "firebase/database";
 
@@ -52,7 +52,7 @@ export default function SilentEmergencyConfig() {
 
   return (
     <View style={styles.container}>
-      <Text>Silent Emergency Contact List</Text>
+      <Text style={{color:'white', fontSize:20, fontWeight:'bold'}}>Silent Emergency Contact List</Text>
 
       <TouchableHighlight 
           style={styles.addContact}
@@ -72,39 +72,44 @@ export default function SilentEmergencyConfig() {
           }}>
           <View style={{marginTop: 22, alignItems: 'center'}}>
             <View>
-              <Text>Add New Contact</Text>
+              <Text style={{marginTop:'50%', fontSize:20}}>Add New Contact</Text>
               <TextInput placeholder="Name" style={styles.modalItems} onChangeText={setName}/>
               <TextInput placeholder="Phone Number" style={styles.modalItems} onChangeText={setPhoneNumber}/>
 
-              <TouchableHighlight
-                onPress={() => {
-                  setModalVisible(false);
+              <View style={{width:"100%",display:'flex',flexDirection:'row',marginTop:20,alignContent:'center',justifyContent:'center'}}>
+                <TouchableHighlight
+                style = {{backgroundColor:"grey", padding:10, display:'inline-block',margin:3}}
+                    onPress={() => {
+                    setModalVisible(false);
 
-                }}>
-                <Text>Close</Text>
-              </TouchableHighlight>
+                    }}>
+                    <Text>Close</Text>
+                </TouchableHighlight>
 
-              <TouchableHighlight
-                onPress={() => {
-                  setModalVisible(false);
-                  console.log(name);
-                  console.log(phoneNumber);
-                  const newUserEntry = {
-                  name : name,
-                  phoneNumber : phoneNumber,
-                  };
+                <TouchableHighlight
+                    style = {{backgroundColor:"green", padding:10, display:'inline-block',margin:3}}
+                    onPress={() => {
+                    setModalVisible(false);
+                    console.log(name);
+                    console.log(phoneNumber);
+                    const newUserEntry = {
+                    name : name,
+                    phoneNumber : phoneNumber,
+                    };
 
-                  set(ref(db, `silentEmergencyContacts/${auth.currentUser.uid}/${phoneNumber}`), newUserEntry);
+                    set(ref(db, `silentEmergencyContacts/${auth.currentUser.uid}/${phoneNumber}`), newUserEntry);
 
-                }}>
-                <Text>Save</Text>
-              </TouchableHighlight>
+                    }}>
+                    <Text>Save</Text>
+                </TouchableHighlight>
+              </View>
+              
             </View>
           </View>
         </Modal>
 
         {persons.map((person) => (
-            <View key={person?.phoneNumber}>
+            <View key={person?.phoneNumber}  style={{backgroundColor : "#1b3a4f" }}>
             <TouchableHighlight
                     onPress={() => openUserModal(person)}
                 >
@@ -121,9 +126,9 @@ export default function SilentEmergencyConfig() {
                 }}>
                 <View style={{marginTop: 22, alignItems: 'center'}}>
                     <View>
-                    <Text>User Details</Text>
-                    <TextInput value={activeModalPersonName} style={styles.modalItems} onChangeText={setActiveModalPersonName}/>
-                    <TextInput value={activeModalPersonPhoneNumber} style={styles.modalItems} onChangeText={setActiveModalPersonPhoneNumber}/>
+                    <Text style={{marginTop:'50%', fontSize:20}}>User Details</Text>
+                    <TextInput value={activeModalPersonName ? activeModalPersonName : ''} style={styles.modalItems} onChangeText={setActiveModalPersonName}/>
+                    <TextInput value={activeModalPersonPhoneNumber ? activeModalPersonPhoneNumber : ''} style={styles.modalItems} onChangeText={setActiveModalPersonPhoneNumber}/>
 
                     <View style={{width:"100%",display:'flex',flexDirection:'row',marginTop:20}}>
                         <TouchableHighlight
@@ -186,13 +191,13 @@ export default function SilentEmergencyConfig() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#1b3a4f',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 50,
   },
   scrollContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#1b3a4f',
     width: '100%',
   },
   addContact:{
@@ -209,6 +214,8 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 15,
     marginTop: 5,
+    backgroundColor:'white',
+    fontWeight:'bold',
   },
   modalItems:{
     margin:20,
