@@ -110,11 +110,12 @@ De implementat:
 - Log In Email si Parola  X
 - Register Email, Parola, Numar Telefon   X
 - Chat function + cautare useri ( search ) -calin
-- Dropdown ca sa adaugi si sa stergi useri in lista de useri silent -radu
-- Dropdown ca sa adaugi si sa stergi useri in lista de useri loud -radu
+- Dropdown ca sa adaugi si sa stergi useri in lista de useri silent -radu (aproape gata)
+- Dropdown ca sa adaugi si sa stergi useri in lista de useri loud -radu (aproape gata)
 - Adauga poza la profil in firebase storage si pune in acel user imgurl acel link, ca sa vezi in myprofile, in drawer si in conversatii --calin
 - Functie trimitere mesaje persoane cu locatia ta -sonia si radu -- butonul are 2 stari (apasat -> locatia este retrimisa la 30sec ; neapast -> oprit)
 - Cand apas pe emergency loud, pe langa mesajele trimise, sa sune alarma telefonului + deschidere flashlight --aer
+- Profile page -Radu
 
 + CREAT POWERPOINT APLICATIE
 
