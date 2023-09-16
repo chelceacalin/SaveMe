@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-native';
 import { TouchableHighlight } from 'react-native';
 import { db } from '../../config/firebase';
-import { set, ref, onValue} from "firebase/database";
+import { set, ref, onValue, remove} from "firebase/database";
 
 
 
@@ -20,6 +20,16 @@ export default function LoudEmergencyConfig() {
   const [modalVisible, setModalVisible] = useState(false);
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [userModalVisible, setUserModalVisible] = useState(false);
+  const [activeModalPersonName, setActiveModalPersonName] = useState(null);
+  const [activeModalPersonPhoneNumber, setActiveModalPersonPhoneNumber] = useState(null);
+
+
+  const openUserModal = (person) => {
+    setActiveModalPersonName(person.name);
+    setActiveModalPersonPhoneNumber(person.phoneNumber);
+    setUserModalVisible(true);
+  };
 
 
     useEffect(() => {
@@ -64,39 +74,113 @@ export default function LoudEmergencyConfig() {
               <TextInput placeholder="Name" style={styles.modalItems} onChangeText={setName}/>
               <TextInput placeholder="Phone Number" style={styles.modalItems} onChangeText={setPhoneNumber}/>
 
-              <TouchableHighlight
-                onPress={() => {
-                  setModalVisible(false);
+              <View style={{width:"100%",display:'flex',flexDirection:'row',marginTop:20,alignContent:'center',justifyContent:'center'}}>
 
-                }}>
-                <Text>Close</Text>
-              </TouchableHighlight>
+                <TouchableOpacity
+                    style = {{backgroundColor:"grey", padding:10, display:'inline-block',margin:3}}
+                    onPress={() => {
+                    setModalVisible(false);
 
-              <TouchableHighlight
-                onPress={() => {
-                  setModalVisible(false);
-                  console.log(name);
-                  console.log(phoneNumber);
-                  const newUserEntry = {
-                  name : name,
-                  phoneNumber : phoneNumber,
-                  };
+                    }}>
+                    <Text>Close</Text>
+                </TouchableOpacity>
 
-                  set(ref(db, `loudEmergencyContacts/${auth.currentUser.uid}/${phoneNumber}`), newUserEntry);
+                <TouchableOpacity
+                    style = {{backgroundColor:"green", padding:10, display:'inline-block',margin:3}}
+                    onPress={() => {
+                    setModalVisible(false);
+                    console.log(name);
+                    console.log(phoneNumber);
+                    const newUserEntry = {
+                    name : name,
+                    phoneNumber : phoneNumber,
+                    };
 
-                }}>
-                <Text>Save</Text>
-              </TouchableHighlight>
+                    set(ref(db, `loudEmergencyContacts/${auth.currentUser.uid}/${phoneNumber}`), newUserEntry);
+
+                    }}>
+                    <Text>Save</Text>
+                </TouchableOpacity>
+
+                </View>
             </View>
           </View>
         </Modal>
 
         {persons.map((person) => (
+            <View key={person?.phoneNumber}>
             <TouchableOpacity
-                key={person.phoneNumber}   
-            >
-            <Text style={styles.item}>{person.name}</Text>
+                    onPress={() => openUserModal(person)}
+                >
+                <Text style={styles.item} key={person.phoneNumber}>{person.name}</Text>
             </TouchableOpacity>
+
+            <Modal 
+                animationType="fade"
+                transparent={false}
+                visible={userModalVisible}
+                onRequestClose={() => {
+                    alert('Modal has been closed.');
+                }}>
+                <View style={{marginTop: 22, alignItems: 'center'}}>
+                    <View>
+                    <Text>User Details</Text>
+                    <TextInput value={activeModalPersonName} style={styles.modalItems} onChangeText={setActiveModalPersonName}/>
+                    <TextInput value={activeModalPersonPhoneNumber} style={styles.modalItems} onChangeText={setActiveModalPersonPhoneNumber}/>
+
+                    <View style={{width:"100%",display:'flex',flexDirection:'row',marginTop:20,alignContent:'center',justifyContent:'center'}}>
+                        <TouchableOpacity
+                            style = {{backgroundColor:"grey", padding:10, display:'inline-block', margin:3}}
+                            onPress={() => {
+                            setUserModalVisible(false);
+                            setActiveModalPersonName('');
+                            setActiveModalPersonPhoneNumber('');
+                            }}>
+                            <Text 
+                            style = {{color:"white"}}
+                            >Cancel</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style = {{backgroundColor:"green", padding:10, display:'inline-block',margin:3}}
+                            onPress={() => {
+                            setUserModalVisible(false);
+
+                            const newUserEntry = {
+                                name : activeModalPersonName,
+                                phoneNumber : activeModalPersonPhoneNumber,
+                            };
+                            console.log(newUserEntry)
+                            set(ref(db, `loudEmergencyContacts/${auth.currentUser.uid}/${activeModalPersonPhoneNumber}`), newUserEntry);
+
+                            setActiveModalPersonName('');
+                            setActiveModalPersonPhoneNumber('');
+
+                            }}>
+                            <Text 
+                            style = {{color:"white"}}
+                            >Edit</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style = {{backgroundColor:"red", padding:10, display:'inline-block',margin:3}}
+                            onPress={() => {
+                            set(ref(db, `loudEmergencyContacts/${auth.currentUser.uid}/${activeModalPersonPhoneNumber}`), null);
+                            setUserModalVisible(false);
+                            setActiveModalPersonName('');
+                            setActiveModalPersonPhoneNumber('');
+                            }}>
+                            <Text 
+                            style = {{color:"white"}}
+                            >Delete</Text>
+                        </TouchableOpacity>
+                    </View>
+                    </View>
+                </View>
+            </Modal>
+            
+            </View>
+
         ))}
         </ScrollView>
     </View>
