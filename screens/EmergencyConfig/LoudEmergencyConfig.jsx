@@ -51,7 +51,7 @@ export default function LoudEmergencyConfig() {
 
   return (
     <View style={styles.container}>
-      <Text>Loud Emergency Contact List</Text>
+      <Text style={{color:'white', fontSize:20, fontWeight:'bold'}}>Loud Emergency Contact List</Text>
 
       <TouchableHighlight 
           style={styles.addContact}
@@ -71,7 +71,7 @@ export default function LoudEmergencyConfig() {
           }}>
           <View style={{marginTop: 22, alignItems: 'center'}}>
             <View>
-              <Text>Add New Contact</Text>
+              <Text style={{marginTop:'50%', fontSize:20}}>Add New Contact</Text>
               <TextInput placeholder="Name" style={styles.modalItems} onChangeText={setName}/>
               <TextInput placeholder="Phone Number" style={styles.modalItems} onChangeText={setPhoneNumber}/>
 
@@ -109,7 +109,7 @@ export default function LoudEmergencyConfig() {
         </Modal>
 
         {persons.map((person) => (
-            <View key={person?.phoneNumber}>
+            <View key={person?.phoneNumber} style={{backgroundColor : "#1b3a4f" }}>
             <TouchableHighlight
                     onPress={() => openUserModal(person)}
                 >
@@ -126,7 +126,7 @@ export default function LoudEmergencyConfig() {
                 }}>
                 <View style={{marginTop: 22, alignItems: 'center'}}>
                     <View>
-                    <Text>User Details</Text>
+                    <Text style={{marginTop:'50%', fontSize:20}}>User Details</Text>
                     <TextInput value={activeModalPersonName} style={styles.modalItems} onChangeText={setActiveModalPersonName}/>
                     <TextInput value={activeModalPersonPhoneNumber} style={styles.modalItems} onChangeText={setActiveModalPersonPhoneNumber}/>
 
@@ -192,13 +192,13 @@ export default function LoudEmergencyConfig() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#1b3a4f",
     alignItems: 'center',
     justifyContent: 'center',
     padding: 50,
   },
   scrollContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#1b3a4f',
     width: '100%',
   },
   addContact:{
@@ -215,6 +215,8 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 15,
     marginTop: 5,
+    backgroundColor:'white',
+    fontWeight:'bold',
   },
   modalItems:{
     margin:20,

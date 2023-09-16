@@ -30,9 +30,9 @@ export default function App() {
   const { user } = useAuthentication();
 
   return (
-    <NavigationContainer>
+    <NavigationContainer backgroundColor="#1b3a4f">
       {/* Set StatusBar with the desired background color and bar style */}
-      <StatusBar backgroundColor="#000000" barStyle="light-content" />
+      <StatusBar backgroundColor="#1b3a4f" barStyle="light-content" />
 
       {user ? (
         <StackNavigatorWithDrawer />

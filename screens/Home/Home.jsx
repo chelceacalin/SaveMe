@@ -17,6 +17,85 @@ export default function HomeScreen({ navigation }) {
   const [loudButtonPressed, setLoudButtonPressed] = useState(false);
   const [silentButtonPressed, setSilentButtonPressed] = useState(false);
 
+  const quotes = [
+    {
+      "quote": "Believe in yourself and all that you are."
+    },
+    {
+      "quote": "You are stronger than you think."
+    },
+    {
+      "quote": "Every day is a fresh start."
+    },
+    {
+      "quote": "Success begins with a single step."
+    },
+    {
+      "quote": "Inhale courage, exhale fear."
+    },
+    {
+      "quote": "You are capable of amazing things."
+    },
+    {
+      "quote": "Stay positive, work hard, make it happen."
+    },
+    {
+      "quote": "Your time is now."
+    },
+    {
+      "quote": "Embrace the journey, not just the destination."
+    },
+    {
+      "quote": "Dream big, work hard."
+    },
+    {
+      "quote": "The only limit is you."
+    },
+    {
+      "quote": "Every moment is a fresh beginning."
+    },
+    {
+      "quote": "You are the author of your story."
+    },
+    {
+      "quote": "Chase your dreams with determination."
+    },
+    {
+      "quote": "Happiness is a choice."
+    },
+    {
+      "quote": "Focus on the good."
+    },
+    {
+      "quote": "You are enough, just as you are."
+    },
+    {
+      "quote": "Keep going, you're getting there."
+    },
+    {
+      "quote": "Hard times may have held you down, but they will not last forever."
+    },
+    {
+      "quote": "Do something today that your future self will thank you for."
+    },
+    {
+      "quote": "The best way to predict the future is to create it."
+    },
+    {
+      "quote": "Be the reason someone smiles today."
+    },
+    {
+      "quote": "Success is not the key to happiness; happiness is the key to success."
+    },
+    {
+      "quote": "You are never too old to set another goal or to dream a new dream."
+    },
+    {
+      "quote": "The only way to do great work is to love what you do."
+    }
+  ]
+  
+
   useEffect(() => {
     getLocationPermission();
   }, []);
@@ -76,7 +155,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1, 
     alignItems: "center",
-    marginTop:'50%'
+    marginTop:100
   },
   button: {
     display: "flex",
