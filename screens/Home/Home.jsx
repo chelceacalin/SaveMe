@@ -86,11 +86,11 @@ const styles = StyleSheet.create({
 		color: 'white',
 		fontWeight: 500,
 		marginRight: 10,
-		fontSize: 'x-large'
+		fontSize: 20
 	},
 	emergencyType: {
 		color: '#ffba1e',
 		fontWeight: 700,
-		fontSize: 'x-large'
+		fontSize: 20
 	}
 });
