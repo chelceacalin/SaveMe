@@ -97,13 +97,11 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 		marginBottom: 40,
 		marginTop: 40,
-		fontWeight: 700,
 	},
 	signUpLink: {
 		color: "#FF3D00",
 		fontSize: 15,
 		marginTop: 20,
-		fontWeight: 700,
 		paddingLeft: 15,
 	},
 	lifeMatters: {
@@ -113,7 +111,6 @@ const styles = StyleSheet.create({
 	},
 	label: {
 		color: "white",
-		fontWeight: 700,
 		marginBottom: 5,
 	},
 	inputContainer: {
@@ -142,7 +139,6 @@ const styles = StyleSheet.create({
 	signInButtonTitle: {
 		color: "#1B394F",
 		fontSize: 18,
-		fontWeight: 700,
 	},
 	error: {
 		marginTop: 10,
