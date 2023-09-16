@@ -32,7 +32,7 @@ function CustomDrawerContent(props) {
           <MaterialCommunityIcons name="face-man-profile" size={24} color="black" />
             <TouchableOpacity 
               style={styles.button}
-              onPress={() => props.navigation.navigate('profile')}
+              onPress={() => props.navigation.navigate('myprofile')}
             >
               <Text style={styles.buttonText}>My Profile</Text>
             </TouchableOpacity>
