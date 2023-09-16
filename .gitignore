@@ -4,3 +4,4 @@ node_modules
 /.idea/modules.xml
 /.idea/saveme.iml
 /.idea/vcs.xml
+.vscode
