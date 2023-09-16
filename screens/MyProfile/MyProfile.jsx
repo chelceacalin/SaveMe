@@ -19,7 +19,6 @@ import {
 } from "@firebase/storage";
 import { useAuthentication } from "../../hooks/useAuthentication";
 import * as ImagePicker from "expo-image-picker";
-import { ToastAndroid } from "react-native";
 
 const auth = getAuth();
 
@@ -49,10 +48,6 @@ export default function MyProfile() {
             update(userRef, { photoUrl: res, username, phoneNumber });
             readUserData();
 
-            ToastAndroid.show(
-              "Profile updated successfully!",
-              ToastAndroid.SHORT
-            );
           });
         });
       });
