@@ -10,7 +10,7 @@
 
 Technologies Used: React Native, Firebase Database, Firebase Storage, Expo Cli, Twillio
 
-##Functionalities:
+## Functionalities:
 
 <pre>
 - Login and register using firebase 
@@ -26,5 +26,15 @@ Technologies Used: React Native, Firebase Database, Firebase Storage, Expo Cli, 
 
 - Widget on home screen to acces the emergency buttons without opening the app
 - Google and Facebook Login  
+
+![home](https://github.com/chelceacalin/SaveMe/assets/76866499/9c17c82e-8210-4d54-94f6-92e52f6b20fa)
+![myprofile](https://github.com/chelceacalin/SaveMe/assets/76866499/eb6f7344-2332-4566-9082-85cedc44957b)
+![chatting](https://github.com/chelceacalin/SaveMe/assets/76866499/e933b03c-d9c6-4b2d-aff6-86dfb63c5ab2)
+![conversations](https://github.com/chelceacalin/SaveMe/assets/76866499/f2b3b131-134b-4284-b474-da29da0b5c40)
+![loginPage](https://github.com/chelceacalin/SaveMe/assets/76866499/8c3a8880-59ec-4c2d-ba88-d14f536b7e5d)
+![camera](https://github.com/chelceacalin/SaveMe/assets/76866499/9f42704a-e96d-4058-a447-56d9aaed3da8)
+
+
+
 
 
