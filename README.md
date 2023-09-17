@@ -26,7 +26,7 @@ Technologies Used: React Native, Firebase Database, Firebase Storage, Expo Cli, 
 
 - Widget on home screen to acces the emergency buttons without opening the app
 - Google and Facebook Login
-
+- Make it looks better, but functionality was more important
 ## How the app looks
 
 <p align="center">
