@@ -22,11 +22,18 @@ Technologies Used: React Native, Firebase Database, Firebase Storage, Expo Cli, 
 - Besides alarm starting and location sharing when pressing the emergency button, your phone starts both the back camera and front camera and starts taking pictures every 2 seconds, uploading them to the cloud so that your friends can access those pictures and give the photos to the police to find the attacker faster.
 </pre>
 
+## Challenges:
+- No one knew react native and we learned while doing
+- A lot of deprecated libraries and dependency management problems
+- Sometimes it worked on android version, but not on the web version, and sometimes in reverse.
+
 ## What we wanted to do but we didn't have time:
 
 - Widget on home screen to acces the emergency buttons without opening the app
 - Google and Facebook Login
 - Make it looks better, but functionality was more important
+
+
 ## How the app looks
 
 <p align="center">
