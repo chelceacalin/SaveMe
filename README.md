@@ -47,6 +47,11 @@ Technologies Used: React Native, Firebase Database, Firebase Storage, Expo Cli, 
   <img src="https://github.com/chelceacalin/SaveMe/assets/76866499/9f42704a-e96d-4058-a447-56d9aaed3da8" width="200" alt="Camera">
 </p>
 
+## Who are we?
+- Colleagues, programmers and a lot of other names, but, most important, friends.
+
+![us](https://github.com/chelceacalin/SaveMe/assets/76866499/cb30dfeb-3bfe-49a0-b026-2a14de0ce8dc)
+
 
 
 
