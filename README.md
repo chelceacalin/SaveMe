@@ -6,7 +6,7 @@
    Save Me stands as the innovative solution developed by me and my team, Bits Please, during the ESolutions 2023 Hackathon, where we managed to win the hearts of the people and also take the first place.
 
 ## What was the idea?
- Every parent's first priority is their children, and there have been numerous news reports about kidnappings happening all around the world. Our application makes a significant improvement in vulnerable people's safety
+ Every parent's first priority is their children, and, with the alarming reports of kidnappings occurring worldwide, we created an application which makes a significant improvement in providing safety for vulnerable people.
 
 Technologies Used: React Native, Firebase Database, Firebase Storage, Expo Cli, Twillio
 
