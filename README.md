@@ -2,216 +2,29 @@
 
 
 
-## Getting started
+## Introduction
+   Save Me stands as the innovative solution developed by me and my team, Bits Please, during the ESolutions 2023 Hackathon, where we managed to win the hearts of the people and also take the first place.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## What was the idea?
+ Every parent's first priority is their children, and there have been numerous news reports about kidnappings happening all around the world. Our application makes a significant improvement in vulnerable people's safety
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Technologies Used: React Native, Firebase Database, Firebase Storage, Expo Cli, Twillio
 
-## Add your files
+##Functionalities:
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+<pre>
+- Login and register using firebase 
+- Chatting function and user searching, ability to delete messages and send emojis
+- Ability to add friends/emergency people to 2 types of lists - emergency loud and emergency silent.
+- The difference between these two is the kind of danger you are in. If you are in the subway or a public place, then emergency loud starts a very loud alarm so everyone knows that you are in danger. But if you are already kidnapped and want to send your location to your contacts, you might not want the kidnapper to hear that, so here comes the emergency silent list.
+- Add profile pictures and be able edit them, with the pictures stored in the cloud.
+- Send SMS to your emergency contacts' phone numbers along with a link to your location (opens Google Maps with a link to your current location). Your location is sent every 5 minutes to your contacts so that they can trace the direction you are going, similar to live location sharing.
+- Besides alarm starting and location sharing when pressing the emergency button, your phone starts both the back camera and front camera and starts taking pictures every 2 seconds, uploading them to the cloud so that your friends can access those pictures and give the photos to the police to find the attacker faster.
+</pre>
 
-```
-cd existing_repo
-git remote add origin https://gitlab.esolutions.ro/hackathon-2023/interns/saveme.git
-git branch -M main
-git push -uf origin main
-```
+## What we wanted to do but we didn't have time:
 
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.esolutions.ro/hackathon-2023/interns/saveme/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
-
-#DE FACUT
-
-Nume Echipa: 
-Nume Applicatie: Save Me
-Tema: Aplicatie mobila pentru protejarea femeilor de rapiri
-Stack: Front - React Native, Ui Library - Native Base, Stocare Date - Firebase Database, stocare Imagini - Firebase Storage
-
-Link Figma: https://www.figma.com/file/JE0aMXAjw5IDt7zUo2PrIb/Save-Me?type=design&node-id=0-1&mode=design&t=3jiteWgpoT92La6K-0
+- Widget on home screen to acces the emergency buttons without opening the app
+- Google and Facebook Login  
 
 
-De instalat:
-Visual Studio Code, Android Studio ( desktop ) / Expo Go (Telefon)
-Extensii: Auto Rename Tag, Bracket Pair Color DLW, React
-
-De implementat:
-- Design pagini ca in figma
-- Log In Email si Parola  X
-- Register Email, Parola, Numar Telefon   X
-- Chat function + cautare useri ( search ) -calin
-- Dropdown ca sa adaugi si sa stergi useri in lista de useri silent -radu (aproape gata)
-- Dropdown ca sa adaugi si sa stergi useri in lista de useri loud -radu (aproape gata)
-- Adauga poza la profil in firebase storage si pune in acel user imgurl acel link, ca sa vezi in myprofile, in drawer si in conversatii --calin
-- Functie trimitere mesaje persoane cu locatia ta -sonia si radu -- butonul are 2 stari (apasat -> locatia este retrimisa la 30sec ; neapast -> oprit)
-- Cand apas pe emergency loud, pe langa mesajele trimise, sa sune alarma telefonului + deschidere flashlight --aer
-- Profile page -Radu
-
-+ CREAT POWERPOINT APLICATIE
-
-Optional (daca mai e timp ):
-- Widget sa poti porni alarmele direct din Home la telefon
-- Setat timer ca sa se trimita mesajul cu locatia odata la 5 minute, indiferent daca ai inchis sau nu aplicatia
-- Camera sa faca poze selfie/back camera pana nu opresti alarma
-- Pozele sa fie uploadate in cloud (firebase storage)
-- In main page acel quote section sa ia un quote random sa il actualizeze la ceva timp indiferent daca deschizi sau nu app
-- Log In Google Si poate Facebook   
-
-
-
-De instalat: React expo cli pe calc tuturor
-In proiect: 
-react-native-uuid,@firebase/database, firebase/storage,expo-image-picker,firebase,firebase/auth,@react-navigation/stack,@react-navigation/native,firebase/auth,firebase/storage,react-native-vector-icons/FontAwesome,react-native-elements,@react-navigation/drawer,@react-navigation/native
-
-
-DB Structure:
-
-users:
- key
-    user_id=key
-    username
-    email
-    password
-    phoneNumber
-    photoUrl
-
-silentList
-  user_x_id=key
-    user_y_id=key
-       phoneNumber
-       available=true/false  
-
-
-loudList
-  user_x_id=key
-    user_y_id
-       phoneNumber
-       available=true/false  
-
-
-
-message:
- user_x_id
-   user_y_id
-      key: message_id
-         message_id:key
-         message: text
-         whoSentIt: user id
-         toWhom: user id
-   
-
-
-
-
-
-
-Example
-
-
-silentList
-  user_1_id
-    user_2_id
-       phoneNumber
-       available=true/false  
-    user_3_id
-       phoneNumber
-       available=true/false
-     user_4_id
-       phoneNumber
-       available=true/false
-  user_2_id
-    user_11_id
-       phoneNumber
-       available=true/false  
-    user_3_id
-       phoneNumber
-       available=true/false
-     user_5_id
-       phoneNumber
-       available=true/false
-
-
-
-message:
- user_1_id
-    user_2_id
-        msg_1
-            msg_1
-            salut
-            user_2_id
-            user_1_id
-         msg_2
-            msg_2
-            salut
-            user_2_id
-            user_1_id
