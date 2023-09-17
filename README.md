@@ -43,7 +43,7 @@ Technologies Used: React Native, Firebase Database, Firebase Storage, Expo Cli, 
 </p>
 <p align="center">
   <img src="https://github.com/chelceacalin/SaveMe/assets/76866499/f2b3b131-134b-4284-b474-da29da0b5c40" width="200" alt="Conversations">
-  <img src="https://github.com/chelceacalin/SaveMe/assets/76866499/8c3a8880-59ec-4c2d-ba88-d14f536b7e5d" width="200" alt="Login Page">
+  <img src="https://github.com/chelceacalin/SaveMe/assets/76866499/1e64ced9-9b45-41c1-9d92-903e3f3e4152" width="200" alt="Twillio Message">
   <img src="https://github.com/chelceacalin/SaveMe/assets/76866499/9f42704a-e96d-4058-a447-56d9aaed3da8" width="200" alt="Camera">
 </p>
 
